@@ -61,21 +61,27 @@ export const useAuth = () => {
 
     useEffect(() => {
 
+        const token = localStorage.getItem("token");
+
         const fetchUser = async () => {
             try {
-                const data = await getMe()
-                setUser(data.user)
+                const data = await getMe();
+                setUser(data.user);
             } catch (err) {
-                console.log(err)
+                console.log(err);
                 localStorage.removeItem("token");
             } finally {
-                setLoading(false)
+                setLoading(false);
             }
+        };
+
+        if (token) {
+            fetchUser();
+        } else {
+            setLoading(false);
         }
 
-        fetchUser()
-
-    }, [])
+    }, []);
 
     return {
         user,
@@ -86,3 +92,11 @@ export const useAuth = () => {
         handleGetMe,
     }
 }
+
+useEffect(() => {
+
+
+
+
+
+}, []);
