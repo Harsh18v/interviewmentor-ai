@@ -25,6 +25,7 @@ export const useAuth = () => {
         setLoading(true)
         try {
             const data = await login({ email, password })
+            localStorage.setItem("token", data.token);
             setUser(data.user)
         } catch (error) {
             console.log(error)
