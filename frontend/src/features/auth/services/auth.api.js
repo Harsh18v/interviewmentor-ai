@@ -55,12 +55,19 @@ export async function logout() {
 
 
 export async function getMe() {
-
     try {
-        const response = await api.get('/api/auth/get-me')
 
-        return response.data
+        const token = localStorage.getItem("token");
+
+        const response = await api.get('/api/auth/get-me', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        return response.data;
+
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
