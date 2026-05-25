@@ -10,13 +10,37 @@ const Generate = () => {
     const { loading, generateReport, reports, getReports } = useInterview()
     const [selfDescription, setSelfDescription] = useState("")
     const [jobDescription, setJobDescription] = useState("")
+    const [error, setError] = useState("")
     const resumeInputRef = useRef()
     const navigate = useNavigate()
 
     const handleGenerateReport = async () => {
-        const resumeFile = resumeInputRef.current.files[0]
-        const data = await generateReport({ resumeFile, jobDescription, selfDescription })
-        navigate(`/report/${data._id}`)
+        setError("")
+        const resumeFile = resumeInputRef.current?.files?.[0]
+
+        if (!resumeFile) {
+            setError("Please upload your resume before generating a report.")
+            return
+        }
+        if (!jobDescription.trim()) {
+            setError("Please enter the job description.")
+            return
+        }
+        if (!selfDescription.trim()) {
+            setError("Please describe yourself before generating a report.")
+            return
+        }
+
+        try {
+            const data = await generateReport({ resumeFile, jobDescription, selfDescription })
+            if (!data?._id) {
+                throw new Error("No report ID returned")
+            }
+            navigate(`/report/${data._id}`)
+        } catch (err) {
+            console.error(err)
+            setError("Failed to generate report. Please try again.")
+        }
     }
 
     const handleUserLogout = async () => {
@@ -98,12 +122,16 @@ const Generate = () => {
                         </div>
                     </div>
 
-                    <div className="flex justify-between items-center mt-5">
-                        <p className="text-xs text-gray-500">~30 sec generation</p>
-                        <button onClick={handleGenerateReport}
-                            className="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-sm font-semibold">
-                            Generate
-                        </button>
+                    <div className="flex flex-col gap-3 mt-5">
+                        {error && <p className="text-red-400 text-sm">{error}</p>}
+                        <div className="flex justify-between items-center">
+                            <p className="text-xs text-gray-500">~30 sec generation</p>
+                            <button onClick={handleGenerateReport}
+                                className="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-sm font-semibold"
+                                disabled={loading}>
+                                Generate
+                            </button>
+                        </div>
                     </div>
 
                 </div>
