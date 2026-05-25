@@ -23,7 +23,7 @@ async function registerUserController(req, res) {
     })
 
     if (isUserAlreadyExist) {
-        res.status(409).json({ message: "User already exist" })
+        return res.status(409).json({ message: "User already exist" })
     }
 
     const hash = await bcrypt.hash(password, 10)
@@ -37,7 +37,7 @@ async function registerUserController(req, res) {
 
     const token = jwt.sign({
         id: newUser._id,
-        user: username
+        username: newUser.username
     }, process.env.JWT_SECRET,
         { expiresIn: "1d" }
     )
@@ -50,11 +50,12 @@ async function registerUserController(req, res) {
 
     res.status(201).json({
         message: "User successfully created",
-        newUser: {
+        user: {
             name: newUser.name,
             username: newUser.username,
-            email: username.email,
-        }
+            email: newUser.email,
+        },
+        token
     })
 }
 
@@ -103,7 +104,12 @@ async function loginUserController(req, res) {
 
     res.status(200).json({
         message: "User loggedIn successfully",
-        user,
+        user: {
+            name: user.name,
+            username: user.username,
+            email: user.email,
+        },
+        token
     })
 }
 

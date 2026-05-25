@@ -29,7 +29,7 @@ authRouter.post('/login', authController.loginUserController)
  * @description Logout a user 
  * @access Private
  */
-authRouter.post("/logout", authController.logoutUserController)
+authRouter.post("/logout", authMiddleware.authUser, authController.logoutUserController)
 
 
 /** * @route GET /api/auth/get-me

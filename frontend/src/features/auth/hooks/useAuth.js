@@ -2,10 +2,7 @@ import { useContext, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
 import { login, register, logout, getMe } from "../services/auth.api";
 
-
-
 export const useAuth = () => {
-
     const context = useContext(AuthContext)
     const { user, setUser, loading, setLoading } = context
 
@@ -14,8 +11,10 @@ export const useAuth = () => {
         try {
             const data = await register({ name, username, email, password })
             setUser(data.user)
+            return data
         } catch (error) {
-            console.log(error)
+            console.error(error)
+            throw error
         } finally {
             setLoading(false)
         }
@@ -25,10 +24,11 @@ export const useAuth = () => {
         setLoading(true)
         try {
             const data = await login({ email, password })
-            localStorage.setItem("token", data.token);
             setUser(data.user)
+            return data
         } catch (error) {
-            console.log(error)
+            console.error(error)
+            throw error
         } finally {
             setLoading(false)
         }
@@ -40,8 +40,10 @@ export const useAuth = () => {
             const data = await logout()
             setUser(null)
             alert('Logged out successfully')
+            return data
         } catch (error) {
-            console.log(error)
+            console.error(error)
+            throw error
         } finally {
             setLoading(false)
         }
@@ -52,27 +54,27 @@ export const useAuth = () => {
         try {
             const data = await getMe()
             setUser(data.user)
+            return data
         } catch (error) {
-            console.log(error)
+            console.error(error)
+            throw error
         } finally {
             setLoading(false)
         }
     }
 
     useEffect(() => {
-
         const getAndSetUser = async () => {
             try {
-
                 const data = await getMe()
                 setUser(data.user)
-            } catch (err) { } finally {
+            } catch (err) {
+            } finally {
                 setLoading(false)
             }
         }
 
         getAndSetUser()
-
     }, [])
 
     return {
