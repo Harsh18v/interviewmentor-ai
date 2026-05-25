@@ -32,6 +32,8 @@ export async function login({ email, password }) {
             email,
             password
         })
+        
+        localStorage.setItem("token", data.token);
 
         return response.data
 

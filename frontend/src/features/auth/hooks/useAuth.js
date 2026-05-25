@@ -14,7 +14,6 @@ export const useAuth = () => {
         try {
             const data = await register({ name, username, email, password })
             setUser(data.user)
-            alert('User registered successfully')
         } catch (error) {
             console.log(error)
         } finally {
@@ -27,7 +26,6 @@ export const useAuth = () => {
         try {
             const data = await login({ email, password })
             setUser(data.user)
-            alert('Logged in successfully')
         } catch (error) {
             console.log(error)
         } finally {
