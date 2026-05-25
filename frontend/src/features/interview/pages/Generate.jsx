@@ -21,7 +21,7 @@ const Generate = () => {
 
     const handleUserLogout = async () => {
         handleLogout()
-        navigate('/home')
+        navigate('/')
     }
 
     useEffect(() => {
