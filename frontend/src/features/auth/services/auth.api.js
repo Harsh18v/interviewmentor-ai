@@ -58,9 +58,15 @@ export async function getMe() {
 
     try {
 
-        const response = await api.get("/api/auth/get-me")
+        const token = localStorage.getItem("token");
 
-        return response.data
+        const response = await api.get('/api/auth/get-me', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        return response.data;
 
     } catch (err) {
         console.log(err)
