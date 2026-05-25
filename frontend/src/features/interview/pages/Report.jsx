@@ -41,7 +41,7 @@ export default function Report() {
 
     const handleUserLogout = async () => {
         handleLogout()
-        navigate('/')
+        navigate('/home')
     }
 
 

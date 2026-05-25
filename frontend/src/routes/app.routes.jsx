@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
         element: <Protected> <Generate /> </Protected>
     },
     {
-        path: "/",
+        path: "/home",
         element: <HomePage />
     },
     {
