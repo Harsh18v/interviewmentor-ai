@@ -84,11 +84,3 @@ export const useAuth = () => {
         handleGetMe,
     }
 }
-
-useEffect(() => {
-
-
-
-
-
-}, []);
