@@ -42,7 +42,8 @@ const Generate = () => {
             navigate(`/report/${id}`)
         } catch (err) {
             console.error(err)
-            setError("Failed to generate report. Please try again.")
+            const serverMessage = err?.response?.data?.message || err?.message || "Failed to generate report. Please try again."
+            setError(serverMessage)
         }
     }
 
