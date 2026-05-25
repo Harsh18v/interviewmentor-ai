@@ -24,6 +24,7 @@ export const useInterview = () => {
             setReport(response?.interviewReport)
         } catch (error) {
             console.log(error)
+            throw error
         } finally {
             setLoading(false)
         }
@@ -39,6 +40,7 @@ export const useInterview = () => {
             setReport(response?.interviewReport)
         } catch (error) {
             console.log(error)
+            throw error
         } finally {
             setLoading(false)
         }
@@ -53,6 +55,7 @@ export const useInterview = () => {
             setReports(response?.interviewReports)
         } catch (error) {
             console.log(error)
+            throw error
         } finally {
             setLoading(false)
         }

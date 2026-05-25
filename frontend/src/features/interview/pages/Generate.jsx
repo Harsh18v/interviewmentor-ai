@@ -33,10 +33,13 @@ const Generate = () => {
 
         try {
             const data = await generateReport({ resumeFile, jobDescription, selfDescription })
-            if (!data?._id) {
-                throw new Error("No report ID returned")
+            const id = data?._id ?? data?.interviewReport?._id
+            if (!id) {
+                console.error('No report ID returned from generateReport', data)
+                setError('Server did not return a report ID. Please try again.')
+                return
             }
-            navigate(`/report/${data._id}`)
+            navigate(`/report/${id}`)
         } catch (err) {
             console.error(err)
             setError("Failed to generate report. Please try again.")
