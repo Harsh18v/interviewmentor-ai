@@ -73,7 +73,7 @@ const Generate = () => {
         <>
             <div className='bg-black w-full h-full flex flex-col justify-center items-center text-white'>
 
-                <nav className='w-full bg-[#0d0d0d] border-b border-neutral-800 px-4 md:px-8 py-4 flex items-center justify-between'>
+                <nav className='w-full bg-[#0d0d0d] border-b border-neutral-800 px-4 md:px-8 py-4 flex flex-wrap gap-4 items-center justify-between'>
                     <div className='flex items-center gap-2'>
                         <span className='font-semibold tracking-widest uppercase text-neutral-400 text-sm md:text-sm'>
                             InterviewMentor AI

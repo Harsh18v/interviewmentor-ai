@@ -77,7 +77,7 @@ export default function Report() {
                         className='text-sm md:text-sm text-neutral-400 hover:text-white border border-neutral-700 hover:border-neutral-500 px-3 md:px-4 py-1.5 rounded-lg transition-all duration-200'>
                         New report
                     </button>
-                    <span className='text-xs md:text-sm text-neutral-500'>
+                    <span className='text-sm text-neutral-400'>
                         {user.name}
                     </span>
                     <button
