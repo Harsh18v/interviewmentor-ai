@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-950 text-gray-400 px-6 py-10">
+        <footer className="bg-gray-950 text-gray-400 px-6 py-10 border-t border-gray-700">
 
             <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
 
@@ -43,9 +43,6 @@ const Footer = () => {
 
             </div>
 
-            <div className="text-center text-xs text-gray-500 mt-10">
-                © {new Date().getFullYear()} InterviewMentor AI. All rights reserved.
-            </div>
 
         </footer>
 
