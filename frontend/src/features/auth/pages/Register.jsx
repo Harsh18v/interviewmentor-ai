@@ -93,7 +93,7 @@ const Register = () => {
                                 <input
                                     type="text"
                                     onChange={(e) => setName(e.target.value)}
-                                    placeholder='Harsh Sharma'
+                                    placeholder='Enter your name'
                                     className='w-full h-10 bg-white border border-neutral-200 rounded-lg px-4 text-sm text-black placeholder-neutral-400 outline-none focus:border-black transition-colors duration-200'
                                 />
                             </div>
@@ -104,7 +104,7 @@ const Register = () => {
                                 <input
                                     type="text"
                                     onChange={(e) => setUsername(e.target.value)}
-                                    placeholder='harsh_dev'
+                                    placeholder='Enter username'
                                     className='w-full h-10 bg-white border border-neutral-200 rounded-lg px-4 text-sm text-black placeholder-neutral-400 outline-none focus:border-black transition-colors duration-200'
                                 />
                             </div>
