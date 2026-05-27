@@ -80,7 +80,7 @@ const Generate = () => {
                         </span>
                     </div>
                     <div className='flex items-center gap-4'>
-                        <span className='text-sm text-neutral-400 hidden sm:inline'>
+                        <span className='text-sm text-neutral-400'>
                             {user.name}
                         </span>
                         <button
