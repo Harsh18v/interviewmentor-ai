@@ -6,8 +6,14 @@ const Protected = ({ children }) => {
 
     if (loading) {
         return (
-            <div className='w-full h-screen bg-neutral-900 flex justify-center items-center text-white text-3xl'>
-                <h1>Loading.....</h1>
+            <div className='w-full h-screen bg-black flex flex-col items-center justify-center gap-4'>
+
+                <div className='w-8 h-8 rounded-full border-2 border-neutral-700 border-t-white animate-spin'></div>
+
+                <p className='text-sm text-white tracking-widest uppercase'>
+                    Loading
+                </p>
+
             </div>
         )
     }

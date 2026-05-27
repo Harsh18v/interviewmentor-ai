@@ -3,7 +3,6 @@ import Login from "../features/auth/pages/Login";
 import Register from "../features/auth/pages/Register";
 import Protected from "../features/auth/components/Protected";
 import Generate from "../features/interview/pages/Generate";
-import HomePage from "../pages/HomePage";
 import Report from "../features/interview/pages/Report"
 import NotFound from "../pages/NotFound"
 
@@ -11,7 +10,7 @@ import NotFound from "../pages/NotFound"
 
 export const router = createBrowserRouter([
     {
-        path: "/login",
+        path: "/",
         element: <Login />
     },
     {
@@ -21,10 +20,6 @@ export const router = createBrowserRouter([
     {
         path: "/generate",
         element: <Protected> <Generate /> </Protected>
-    },
-    {
-        path: "/",
-        element: <HomePage />
     },
     {
         path: "/report/:interviewId",

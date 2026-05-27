@@ -9,7 +9,10 @@ const app = express();
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin: "https://harsh-interviewmentor-ai.vercel.app",
+    origin: [
+        "https://harsh-interviewmentor-ai.vercel.app",
+        "http://localhost:5173"
+    ],
     credentials: true
 }))
 

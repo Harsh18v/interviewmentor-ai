@@ -1,4 +1,3 @@
-import Footer from '../../../components/Footer'
 import { useState, useRef, useEffect } from 'react'
 import { useInterview } from '../hooks/useInterview.js'
 import { useNavigate } from 'react-router-dom'
@@ -42,7 +41,7 @@ const Generate = () => {
             navigate(`/report/${id}`)
         } catch (err) {
             console.error(err)
-            const serverMessage = err?.response?.data?.message || err?.message || "Failed to generate report. Please try again."
+            const serverMessage = "Failed to generate report. Please try again."
             setError(serverMessage)
         }
     }
@@ -58,108 +57,161 @@ const Generate = () => {
 
     if (loading) {
         return (
-            < div className='w-full h-screen bg-gray-900 flex justify-center items-center text-white text-3xl' >
-                <h1>Loading.....</h1>
-            </div >
+            <div className='w-full h-screen bg-black flex flex-col items-center justify-center gap-4'>
+
+                <div className='w-8 h-8 rounded-full border-2 border-neutral-700 border-t-white animate-spin'></div>
+
+                <p className='text-sm text-white tracking-widest uppercase'>
+                    Loading
+                </p>
+
+            </div>
         )
     }
 
     return (
         <>
-            <div className='bg-gray-950 w-full h-full flex flex-col justify-center items-center text-white'>
+            <div className='bg-black w-full h-full flex flex-col justify-center items-center text-white'>
 
-                <div className="w-full bg-gray-900 flex justify-around items-center p-4 text-white">
-                    <div className="flex items-center gap-2">
-                        <img src="/logo.png" alt="logo" className="w-8 md:w-10" />
-                        <h1 className="text-lg md:text-xl font-bold">
-                            InterviewMentor <span className="text-blue-400">AI</span>
-                        </h1>
+                <nav className='w-full bg-[#0d0d0d] border-b border-neutral-800 px-4 md:px-8 py-4 flex items-center justify-between'>
+                    <div className='flex items-center gap-2'>
+                        <span className='font-semibold tracking-widest uppercase text-neutral-400 text-sm md:text-sm'>
+                            InterviewMentor AI
+                        </span>
                     </div>
-                    <div className='flex gap-4 justify-center items-center'>
-                        <button onClick={handleUserLogout}
-                            className='bg-red-600 hover:bg-red-500 px-2 py-2 md:px-4 rounded-lg text-sm font-semibold'>
+                    <div className='flex items-center gap-4'>
+                        <span className='text-sm text-neutral-400 hidden sm:inline'>
+                            {user.name}
+                        </span>
+                        <button
+                            onClick={handleUserLogout}
+                            className='text-sm md:text-sm text-neutral-400 hover:text-white border border-neutral-700 hover:border-neutral-500 px-3 md:px-4 py-1.5 rounded-lg transition-all duration-200'>
                             Logout
                         </button>
-                        <span>{user.name}</span>
                     </div>
-                </div>
+                </nav>
 
-                <div className="w-[90%] md:w-[70%] lg:w-[60%] min-h-[60vh] bg-gray-900 rounded-2xl mt-12 p-6 mb-16 shadow-lg">
+                <div className='w-full max-w-3xl mx-auto px-4 md:px-6 py-8 md:py-16'>
 
-                    <div className="text-center mb-6">
-                        <h1 className="text-2xl font-bold">
-                            Create Your Custom
-                            <span className="text-blue-400"> Interview Plan</span>
+                    <div className='mb-8 md:mb-12'>
+                        <h1 className='text-2xl md:text-4xl font-bold text-white mb-2 md:mb-3'>
+                            Build your interview plan
                         </h1>
-                        <p className="text-gray-400 text-sm mt-1">
-                            Let our AI analyze the job requirements and your unique profile to build a winning strategy.
+                        <p className='text-sm md:text-md text-neutral-500'>
+                            Paste the job description and upload your resume.
                         </p>
                     </div>
 
-                    <div className=" grid grid-cols-1 md:grid-cols-2 gap-5">
-                        <div className=" bg-gray-950 rounded-lg p-4 flex flex-col">
-                            <div className="flex justify-between mb-2">
-                                <h2 className="text-sm font-semibold">Target Job Description</h2>
-                                <span className="text-xs text-blue-400">REQUIRED</span>
-                            </div>
-                            <textarea onChange={(e) => { setJobDescription(e.target.value) }}
-                                className=" flex-1 bg-gray-900 rounded p-2 text-sm text-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
-                                placeholder="Paste job description..."
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6'>
+
+                        <div className='flex flex-col gap-2'>
+                            <label className='text-sm  text-white'>
+                                Target Job Description
+                            </label>
+                            <textarea
+                                onChange={(e) => setJobDescription(e.target.value)}
+                                placeholder='Paste the full job description here...'
+                                maxLength={5000}
+                                className='w-full h-64 bg-neutral-900 rounded px-4 py-3 text-sm text-white placeholder-neutral-500 outline-none resize-none transition-colors duration-200'
                             />
-                            <p className="text-xs text-gray-500 text-right mt-1">0/5000</p>
+                            <span className='text-sm text-neutral-500 text-right'>
+                                {jobDescription.length}/5000
+                            </span>
                         </div>
-                        <div className="bg-gray-950 rounded-lg p-4 flex flex-col gap-3">
-                            <h2 className="text-sm font-semibold">Your Profile</h2>
-                            <div>
-                                <input ref={resumeInputRef}
-                                    type="file"
-                                    className='w-full  bg-gray-900 rounded p-4 text-center text-gray-400 text-sm hover:bg-gray-800 transition' />
+
+                        <div className='flex flex-col gap-4'>
+
+                            <div className='flex flex-col gap-2'>
+                                <label className='text-sm font-medium text-white'>
+                                    Your Resume
+                                </label>
+                                <label className='w-full h-24 bg-neutral-900 rounded flex flex-col items-center justify-center cursor-pointer transition-colors duration-200'>
+                                    <span className='text-sm text-neutral-500 hover:text-neutral-300 transition-colors'>
+                                        {resumeInputRef.current?.files?.[0]?.name || 'Click to upload PDF'}
+                                    </span>
+                                    {!resumeInputRef.current?.files?.[0] && (
+                                        <span className='text-sm text-neutral-600 mt-2'>PDF only</span>
+                                    )}
+                                    <input
+                                        ref={resumeInputRef}
+                                        type="file"
+                                        accept='.pdf'
+                                        className='hidden'
+                                    />
+                                </label>
                             </div>
-                            <div className="text-center text-xs text-gray-500">And</div>
-                            <textarea onChange={(e) => { setSelfDescription(e.target.value) }}
-                                className="bg-gray-900 rounded p-2 text-sm text-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
-                                placeholder="Describe yourself..."
-                            />
-                            <div className="text-xs bg-blue-900/30 p-2 rounded text-blue-300">
-                                Resume and description required
+
+                            <div className='flex flex-col gap-2'>
+                                <label className='text-sm font-medium text-white'>
+                                    Anything else we should know?
+                                </label>
+                                <textarea
+                                    onChange={(e) => setSelfDescription(e.target.value)}
+                                    placeholder='e.g. I have 1 year of internship experience in React...'
+                                    className='w-full h-28 bg-neutral-900 rounded px-4 py-3 text-sm text-white placeholder-neutral-500 outline-none resize-none transition-colors duration-200'
+                                />
                             </div>
+
                         </div>
                     </div>
 
-                    <div className="flex flex-col gap-3 mt-5">
-                        {error && <p className="text-red-400 text-sm">{error}</p>}
-                        <div className="flex justify-between items-center">
-                            <p className="text-xs text-gray-500">~30 sec generation</p>
-                            <button onClick={handleGenerateReport}
-                                className="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-sm font-semibold"
-                                disabled={loading}>
-                                Generate
-                            </button>
+                    <div className='flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0 mt-6 md:mt-8'>
+                        <div className='flex items-center gap-3'>
+                            <div className='w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse'></div>
+                            <span className='text-sm text-neutral-600'>30 sec generation</span>
+
                         </div>
+
+                        <button
+                            onClick={handleGenerateReport}
+                            disabled={loading}
+                            className='bg-white hover:bg-neutral-200  text-black px-8 h-10 rounded-lg text-sm font-semibold tracking-wide transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed'>
+                            Generate
+                        </button>
                     </div>
+                    {error && <p className='text-red-400 text-sm mt-4'>{error}</p>}
 
                 </div>
 
-                <div>
+                {reports.length > 0 && (
+                    <div className='w-full max-w-5xl mx-auto px-4 md:px-6 pb-8 md:pb-16'>
 
-                    {reports.length > 0 && (
-                        <section className='bg-gray-900 min-w-full md:w-[80%] lg:w-[70%] min-h-[20vh] p-4 mb-16 rounded'>
-                            <h3 className='text-lg font-bold'>Recently generated reports</h3>
-                            <ul className=''>
+                        <div className='border-t border-neutral-800 pt-12'>
+                            <h2 className='text-md font-medium text-neutral-500 uppercase tracking-widest mb-6'>
+                                Recent Reports
+                            </h2>
+
+                            <div className='flex flex-col gap-3'>
                                 {reports.map(report => (
-                                    <li onClick={() => { navigate(`/report/${report._id}`) }}
-                                        className='bg-gray-800 flex flex-col gap-4 p-4 m-4 rounded cursor-pointer'
-                                        key={report._id}>
-                                        <h3>{report.title}</h3>
-                                        <p className='text-blue-500'>Generated on {new Date(report.createdAt).toLocaleDateString()}</p>
-                                    </li>
-                                ))}
-                            </ul>
-                        </section>
-                    )}
-                </div>
+                                    <div
+                                        key={report._id}
+                                        onClick={() => navigate(`/report/${report._id}`, { replace: true })}
+                                        className='flex items-center justify-between bg-neutral-900 hover:bg-neutral-800 rounded-xl px-5 py-4 cursor-pointer transition-all duration-200'>
 
-                <Footer />
+                                        <div>
+                                            <h3 className='text-md font-medium text-white'>
+                                                {report.title}
+                                            </h3>
+                                            <p className='text-md text-neutral-500 mt-2'>
+                                                {new Date(report.createdAt).toLocaleDateString('en-IN', {
+                                                    day: 'numeric',
+                                                    month: 'long',
+                                                    year: 'numeric'
+                                                })}
+                                            </p>
+                                        </div>
+
+                                        <span className='text-neutral-400'>
+                                            →
+                                        </span>
+
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                    </div>
+                )}
             </div >
         </>
     )
