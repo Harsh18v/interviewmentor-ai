@@ -25,7 +25,7 @@ The platform analyzes the provided information and generates insights, interview
 
 ### Frontend
 - React.js
-- CSS
+- Tailwind CSS
 - Axios
 - React Router
 
