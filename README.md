@@ -50,9 +50,3 @@ The platform analyzes the provided information and generates insights, interview
 
 ---
 
-## Installation
-
-### Clone Repository
-
-```bash
-git clone https://github.com/yourusername/interviewmentor-ai.git
